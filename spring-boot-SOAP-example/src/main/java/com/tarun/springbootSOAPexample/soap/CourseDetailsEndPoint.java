@@ -2,6 +2,8 @@ package com.tarun.springbootSOAPexample.soap;
 
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -9,6 +11,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.tarun.springbootSOAPexample.soap.bean.Course;
+import com.tarun.springbootSOAPexample.soap.exception.CustomRuntimeException;
 import com.tarun.springbootSOAPexample.soap.service.CourseDetailsService;
 import com.tarun.springbootSOAPexample.soap.service.CourseDetailsService.Status;
 
@@ -33,9 +36,11 @@ public class CourseDetailsEndPoint {
 		
 		Course course = theService.findById(request.getId());
 		
+		if(course == null) {
+			throw new CustomRuntimeException("Invalid course ID " + request.getId());
+		}
 		
 		return mapCourseDetails(course);
-	
 	}
 	
 	@PayloadRoot(namespace="http://in28minutes/courses", localPart = "GetAllCourseDetailsRequest")
