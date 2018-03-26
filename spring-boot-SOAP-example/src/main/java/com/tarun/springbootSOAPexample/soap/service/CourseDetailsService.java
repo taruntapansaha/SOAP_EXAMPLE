@@ -26,7 +26,7 @@ public class CourseDetailsService {
 		courseList.add(course4);
 	}
 	
-	public Course find(int id) {
+	public Course findById(int id) {
 		for(Course course: courseList) {
 			if(course.getId() == id) {
 				return course;
@@ -40,7 +40,7 @@ public class CourseDetailsService {
 		return courseList;
 	}
 	
-	public int delete(int id) {
+	public int deleteById(int id) {
 		Iterator<Course> iterator = courseList.iterator();
 		
 		if(iterator.hasNext()) {

@@ -28,7 +28,7 @@ public class CourseDetailsEndPoint {
 	public GetCourseDetailsResponse processCourseDetailsRequest(@RequestPayload 
 			GetCourseDetailsRequest request) {
 		
-		Course course = theService.find(request.getId());
+		Course course = theService.findById(request.getId());
 		
 		
 		return mapCourseDetails(course);
