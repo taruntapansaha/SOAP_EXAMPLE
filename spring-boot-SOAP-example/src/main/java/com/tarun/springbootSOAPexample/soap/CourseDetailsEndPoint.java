@@ -12,6 +12,8 @@ import com.tarun.springbootSOAPexample.soap.bean.Course;
 import com.tarun.springbootSOAPexample.soap.service.CourseDetailsService;
 
 import in28minutes.courses.CourseDetails;
+import in28minutes.courses.DeleteCourseDetailsRequest;
+import in28minutes.courses.DeleteCourseDetailsResponse;
 import in28minutes.courses.GetAllCourseDetailsRequest;
 import in28minutes.courses.GetAllCourseDetailsResponse;
 import in28minutes.courses.GetCourseDetailsRequest;
@@ -45,7 +47,19 @@ public class CourseDetailsEndPoint {
 		return mapAllCourseDetails(courseList);
 	
 	}
-
+	
+	@PayloadRoot(namespace="http://in28minutes/courses", localPart = "DeleteCourseDetailsRequest")
+	@ResponsePayload
+	public DeleteCourseDetailsResponse deleteCourseDetailsRequest(@RequestPayload 
+			DeleteCourseDetailsRequest request) {
+		
+		DeleteCourseDetailsResponse response = new DeleteCourseDetailsResponse();		
+		response.setStatus(theService.deleteById(request.getId()));
+		
+		
+		return response;
+	
+	}
 
 
 	private GetAllCourseDetailsResponse mapAllCourseDetails(List<Course> courseList) {
