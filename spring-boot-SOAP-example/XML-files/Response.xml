@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GetCourseDetailsResponse xmlns="http://in28minutes/courses"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://in28minutes/courses course-details.xsd">
+	<CourseDetails>
+		<id>12</id>
+		<name>Learn Spring Boot</name>
+		<description>How to create an SOAP service</description>
+	</CourseDetails>
+</GetCourseDetailsResponse>
