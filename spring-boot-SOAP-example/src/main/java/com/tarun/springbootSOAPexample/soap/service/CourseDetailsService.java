@@ -10,6 +10,9 @@ import com.tarun.springbootSOAPexample.soap.bean.Course;
 
 @Component
 public class CourseDetailsService {
+	
+	public enum Status {SUCESS, FAILURE};
+	
 	private static List<Course> courseList = new ArrayList<>();
 	
 	static {
@@ -40,17 +43,17 @@ public class CourseDetailsService {
 		return courseList;
 	}
 	
-	public int deleteById(int id) {
+	public Status deleteById(int id) {
 		Iterator<Course> iterator = courseList.iterator();
 		
 		if(iterator.hasNext()) {
 			Course course = iterator.next();
 			if(course.getId() == id) {
 				iterator.remove();
-				return 1;
+				return Status.SUCESS;
 			}
 		}
 		
-		return 0;
+		return Status.FAILURE;
 	}
 }

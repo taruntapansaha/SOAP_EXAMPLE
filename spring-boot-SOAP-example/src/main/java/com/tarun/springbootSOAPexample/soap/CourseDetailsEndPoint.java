@@ -10,6 +10,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.tarun.springbootSOAPexample.soap.bean.Course;
 import com.tarun.springbootSOAPexample.soap.service.CourseDetailsService;
+import com.tarun.springbootSOAPexample.soap.service.CourseDetailsService.Status;
 
 import in28minutes.courses.CourseDetails;
 import in28minutes.courses.DeleteCourseDetailsRequest;
@@ -53,14 +54,22 @@ public class CourseDetailsEndPoint {
 	public DeleteCourseDetailsResponse deleteCourseDetailsRequest(@RequestPayload 
 			DeleteCourseDetailsRequest request) {
 		
-		DeleteCourseDetailsResponse response = new DeleteCourseDetailsResponse();		
-		response.setStatus(theService.deleteById(request.getId()));
+		DeleteCourseDetailsResponse response = new DeleteCourseDetailsResponse();
 		
+		Status status = theService.deleteById(request.getId());
+		response.setStatus(mapStatus(status));
 		
 		return response;
 	
 	}
 
+
+	private in28minutes.courses.Status mapStatus(Status status) {
+		if(status == Status.FAILURE) {
+			return in28minutes.courses.Status.FAILURE;
+		}
+		return in28minutes.courses.Status.SUCCESS;
+	}
 
 	private GetAllCourseDetailsResponse mapAllCourseDetails(List<Course> courseList) {
 		
